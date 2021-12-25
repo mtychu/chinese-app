@@ -5,15 +5,17 @@ type Flashcard @model @auth(rules: [{allow: public}]) {
     chineseTrad: String!
     chineseSimp: String!
 
-    meanings: [String!]!
-    meaningMnemonic: String!
+    meanings: String!
+    meaningMnemonic: String
     meaningHint: String
 
-    reading: [String!]!
-    readingMnemonic: String!
+    reading: String!
+    readingMnemonic: String
     readingHint: String
 
     examples: [String!]!
+
+    unlocks: [String!]!
 }
 
 #User Schema to keep track of general user stuff.
@@ -23,7 +25,7 @@ type User @model @auth(rules: [{allow: public}]) {
     firstName: String
     lastName: String
     email: String
-    progress: [String!]!
+    progress: [String!]! #"[id],[progress]"
     #https://www.supermemo.com/en/archives1990-2015/help/smalg
 }
 
