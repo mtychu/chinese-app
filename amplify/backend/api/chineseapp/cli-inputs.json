@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "chineseapp",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/mchu/workspace/chinese-app/amplify/backend/api/chineseapp/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}

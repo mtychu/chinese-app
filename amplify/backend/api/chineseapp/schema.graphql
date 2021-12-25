@@ -1,0 +1,53 @@
+#Flashcard schema - Chinese Vocabulary
+type Flashcard @model @auth(rules: [{allow: public}]) {
+    id: ID! @primaryKey
+    level: String! @index(name: "byLevel", queryField: "level")
+    chineseTrad: String!
+    chineseSimp: String!
+
+    meanings: [String!]!
+    meaningMnemonic: String!
+    meaningHint: String
+
+    reading: [String!]!
+    readingMnemonic: String!
+    readingHint: String
+
+    examples: [String!]!
+}
+
+#User Schema to keep track of general user stuff.
+type User @model @auth(rules: [{allow: public}]) {
+    id: ID! @primaryKey
+    displayName: String!
+    firstName: String
+    lastName: String
+    email: String
+    progress: [String!]!
+    #https://www.supermemo.com/en/archives1990-2015/help/smalg
+}
+
+type Todo @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    name: String!
+    description: String
+}
+
+type Blog @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    name: String!
+    posts: [Post] @hasMany
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    title: String!
+    blog: Blog @belongsTo
+    comments: [Comment] @hasMany
+}
+
+type Comment @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    post: Post @belongsTo
+    content: String!
+}
