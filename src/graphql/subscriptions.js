@@ -15,6 +15,8 @@ export const onCreateFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }
@@ -34,6 +36,8 @@ export const onUpdateFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }
@@ -53,6 +57,8 @@ export const onDeleteFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }

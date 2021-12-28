@@ -18,6 +18,8 @@ export const createFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }
@@ -40,6 +42,8 @@ export const updateFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }
@@ -62,6 +66,8 @@ export const deleteFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }

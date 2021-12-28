@@ -15,6 +15,8 @@ export const getFlashcard = /* GraphQL */ `
       readingMnemonic
       readingHint
       examples
+      prereqs
+      unlocks
       createdAt
       updatedAt
     }
@@ -47,6 +49,8 @@ export const listFlashcards = /* GraphQL */ `
         readingMnemonic
         readingHint
         examples
+        prereqs
+        unlocks
         createdAt
         updatedAt
       }
@@ -302,6 +306,8 @@ export const level = /* GraphQL */ `
         readingMnemonic
         readingHint
         examples
+        prereqs
+        unlocks
         createdAt
         updatedAt
       }
