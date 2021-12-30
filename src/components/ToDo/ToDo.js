@@ -1,9 +1,10 @@
 /* src/App.js */
 import React, { useEffect, useState } from 'react';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
-import { createTodo } from '../../graphql/mutations';
-import { createFlashcard } from '../../graphql/mutations';
+import { createTodo, createFlashcard } from '../../graphql/mutations';
 import { listTodos } from '../../graphql/queries';
+import NavigationBar from '../Navbar/NavigationBar.js';
+import '../../index.css';
 
 import awsExports from '../../aws-exports';
 Amplify.configure(awsExports);
@@ -353,59 +354,37 @@ const App = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <h2>Amplify Todos</h2>
-      <input
-        onChange={(event) => setInput('name', event.target.value)}
-        style={styles.input}
-        value={TodoFormState.name}
-        placeholder='Name'
-      />
-      <input
-        onChange={(event) => setInput('description', event.target.value)}
-        style={styles.input}
-        value={TodoFormState.description}
-        placeholder='Description'
-      />
-      <button style={styles.button} onClick={addTodo}>
-        Create Todo
-      </button>
-
-      <button style={styles.button} onClick={() => testWords.map(addFlashcard)}>
-        Add Data
-      </button>
-
-      {todos.map((todo, index) => (
-        <div key={todo.id ? todo.id : index} style={styles.todo}>
-          <p style={styles.todoName}>{todo.name}</p>
-          <p style={styles.todoDescription}>{todo.description}</p>
-        </div>
-      ))}
-      {console.log(todos)}
+    <div>
+      <NavigationBar></NavigationBar>
+      <div className='container'>
+        <h2>Amplify Todos</h2>
+        <input
+          onChange={(event) => setInput('name', event.target.value)}
+          className='input'
+          value={TodoFormState.name}
+          placeholder='Name'
+        />
+        <input
+          onChange={(event) => setInput('description', event.target.value)}
+          className='input'
+          value={TodoFormState.description}
+          placeholder='Description'
+        />
+        <button className='button' onClick={addTodo}>
+          Create Todo
+        </button>
+        <button className='button' onClick={() => testWords.map(addFlashcard)}>
+          Add Data
+        </button>
+        {todos.map((todo, index) => (
+          <div key={todo.id ? todo.id : index} className='todo'>
+            <p className='todoName'>{todo.name}</p>
+            <p className='todoDescription'>{todo.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    width: 400,
-    margin: '0 auto',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  todo: { marginBottom: 15 },
-  input: { border: 'none', backgroundColor: '#ddd', marginBottom: 10, padding: 8, fontSize: 18 },
-  todoName: { fontSize: 20, fontWeight: 'bold' },
-  todoDescription: { marginBottom: 0 },
-  button: {
-    backgroundColor: 'black',
-    color: 'white',
-    outline: 'none',
-    fontSize: 18,
-    padding: '12px 0px',
-  },
 };
 
 export default App;
