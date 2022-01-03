@@ -3,12 +3,13 @@
 import { Link } from 'react-router-dom';
 import '../../index.css';
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
   return (
-    <div>
-      <h2>Navigation Bar</h2>
+    <div className='bar'>
+      <h3>{props.title}</h3>
       <nav>
-        <Link to='/home'>Home</Link> | <Link to='/todo'>To Do</Link>
+        <Link to='/home'>Home</Link> | <Link to='/todo'>To Do</Link> |{' '}
+        <Link to='/upload-page'>Upload</Link>
       </nav>
     </div>
   );

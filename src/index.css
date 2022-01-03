@@ -1,21 +1,32 @@
-h2 {
-  font-size: 25px;
+/* Navigation Bar CSS */
+
+.bar {
+  background-color: bisque;
+  display: flex;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 1.5em 3em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5em;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+.hidden-input {
+  display: none;
 }
 
-/* "To-Do CSS (Temporary) */
+nav {
+  margin-left: auto;
+}
+
+/* To-Do CSS (Temporary) */
 .container {
+  background-color: rgb(121, 121, 121);
   width: 400px;
   margin: auto;
   display: flex;

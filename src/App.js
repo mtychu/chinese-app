@@ -2,7 +2,7 @@
 import NavigationBar from './components/Navbar/NavigationBar';
 
 const App = () => {
-  return <NavigationBar></NavigationBar>;
+  return <NavigationBar title={'Homepage'}></NavigationBar>;
 };
 
 export default App;
