@@ -1,8 +1,15 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Navigation Bar CSS */
 
 .bar {
-  background-color: bisque;
+  background-color: rgb(134, 0, 0);
+  color: white;
   display: flex;
+  margin-bottom: 2em;
+  padding-left: 1em;
 }
 
 .button {
@@ -36,6 +43,7 @@ nav {
 }
 
 .todo {
+  background-color: rgb(255, 255, 255);
   margin-bottom: 15px;
 }
 
@@ -50,10 +58,12 @@ nav {
 .todoName {
   font-size: 20px;
   font-weight: bold;
+  padding-left: 1em;
 }
 
 .todoDescription {
-  margin-bottom: 0px;
+  margin-bottom: 1em;
+  padding-left: 1em;
 }
 
 .button {
@@ -62,4 +72,5 @@ nav {
   outline: none;
   font-size: 18px;
   padding: 12px;
+  margin-bottom: 1em;
 }

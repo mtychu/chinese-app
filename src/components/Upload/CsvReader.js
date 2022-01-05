@@ -1,37 +1,60 @@
 import { useState } from 'react';
+import Papa from 'papaparse';
+import { createFlashcard } from '../../graphql/mutations';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
 
-export default function CsvReader() {
-  const [csvFile, setCsvFile] = useState();
-
+const CsvReader = () => {
   const [csvArray, setCsvArray] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const processCSV = (str, delim = ',') => {
-    const headers = str.slice(0, str.indexOf('\n')).split(delim);
-    const rows = str.slice(str.indexOf('\n') + 1).split('\n');
+  async function addFlashcard(flashcard) {
+    try {
+      const result = await API.graphql(graphqlOperation(createFlashcard, { input: flashcard }));
+      console.log(result.data.createFlashcard.chineseTrad);
+    } catch (err) {
+      console.log('error creating flashcard:', err);
+    }
+  }
 
-    const newArray = rows.map((row) => {
-      const values = row.split(delim);
-      const eachObject = headers.reduce((obj, header, i) => {
-        obj[header] = values[i];
-        return obj;
-      }, {});
-      return eachObject;
-    });
-
-    setCsvArray(newArray);
-  };
-
-  const submit = () => {
-    const file = csvFile;
+  const preview = (file) => {
     const reader = new FileReader();
 
-    reader.onload = function (e) {
-      const text = e.target.result;
-      console.log(text);
-      processCSV(text);
+    reader.onload = (e) => {
+      const csvJson = Papa.parse(e.target.result, { delimiter: '|', header: true });
+      setCsvArray(csvJson.data);
+      console.log(csvJson.data);
     };
 
     reader.readAsText(file, 'UTF-8');
+  };
+
+  const parseCard = (flashcard) => {
+    try {
+      return {
+        ...flashcard,
+        examples: stringArrayToJson(flashcard.examples),
+        meanings: stringArrayToJson(flashcard.meanings),
+        prereqs: stringArrayToJson(flashcard.prereqs),
+        reading: stringArrayToJson(flashcard.reading),
+        unlocks: stringArrayToJson(flashcard.unlocks),
+      };
+    } catch (e) {
+      console.error(e);
+      console.error(flashcard);
+    }
+  };
+
+  const stringArrayToJson = (stringArray) => {
+    return JSON.parse('{"data":' + stringArray + '}').data;
+  };
+
+  const submit = async () => {
+    setLoading(true);
+
+    for (const flashcard of csvArray) {
+      addFlashcard(parseCard(flashcard));
+    }
+    setLoading(false);
   };
 
   return (
@@ -41,22 +64,31 @@ export default function CsvReader() {
         <input
           type='file'
           accept='.csv'
-          id='csvFile'
           onChange={(e) => {
-            setCsvFile(e.target.files[0]);
+            preview(e.target.files[0]);
           }}
         ></input>
         <br />
         <br />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            if (csvFile) submit();
-          }}
-        >
-          Submit
-        </button>
       </form>
+      {csvArray.slice(0, 5).map((word, index) => (
+        <div key={index} className='todo'>
+          <p className='todoName'>{word.chineseTrad}</p>
+          <p className='todoDescription'>{word.meanings}</p>
+        </div>
+      ))}
+      <button
+        disabled={loading || csvArray.length === 0}
+        onClick={(e) => {
+          e.preventDefault();
+          submit();
+        }}
+      >
+        Submit
+      </button>
+      {loading && <div>loading...</div>}
     </div>
   );
-}
+};
+
+export default CsvReader;
