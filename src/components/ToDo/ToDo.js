@@ -11,7 +11,7 @@ Amplify.configure(awsExports);
 
 const initialState = { name: '', description: '' };
 
-const App = () => {
+const ToDo = () => {
   const [TodoFormState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState([]);
 
@@ -76,4 +76,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ToDo;

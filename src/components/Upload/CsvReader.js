@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Papa from 'papaparse';
 import { createFlashcard } from '../../graphql/mutations';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import WordCard from './WordCard';
 
 const CsvReader = () => {
   const [csvArray, setCsvArray] = useState([]);
@@ -10,9 +11,8 @@ const CsvReader = () => {
   async function addFlashcard(flashcard) {
     try {
       const result = await API.graphql(graphqlOperation(createFlashcard, { input: flashcard }));
-      console.log(result.data.createFlashcard.chineseTrad);
     } catch (err) {
-      console.log('error creating flashcard:', err);
+      console.error('error creating flashcard:', err);
     }
   }
 
@@ -40,12 +40,15 @@ const CsvReader = () => {
       };
     } catch (e) {
       console.error(e);
-      console.error(flashcard);
     }
   };
 
   const stringArrayToJson = (stringArray) => {
-    return JSON.parse('{"data":' + stringArray + '}').data;
+    try {
+      return JSON.parse('{"data":' + stringArray + '}').data;
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const submit = async () => {
@@ -72,10 +75,13 @@ const CsvReader = () => {
         <br />
       </form>
       {csvArray.slice(0, 5).map((word, index) => (
-        <div key={index} className='todo'>
-          <p className='todoName'>{word.chineseTrad}</p>
-          <p className='todoDescription'>{word.meanings}</p>
-        </div>
+        <WordCard
+          key={index}
+          chineseTrad={word.chineseTrad}
+          chineseSimp={word.chineseSimp}
+          reading={word.reading}
+          meanings={word.meanings}
+        ></WordCard>
       ))}
       <button
         disabled={loading || csvArray.length === 0}

@@ -74,3 +74,23 @@ nav {
   padding: 12px;
   margin-bottom: 1em;
 }
+
+.card {
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 1em;
+}
+
+.card-body {
+  margin-bottom: 1em;
+  padding-left: 1em;
+}
+
+.Link {
+  color: white;
+}
