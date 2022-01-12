@@ -72,7 +72,13 @@ export const onCreateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
@@ -86,7 +92,13 @@ export const onUpdateUser = /* GraphQL */ `
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
@@ -100,7 +112,13 @@ export const onDeleteUser = /* GraphQL */ `
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }

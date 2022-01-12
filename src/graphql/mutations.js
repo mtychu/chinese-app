@@ -74,49 +74,79 @@ export const deleteFlashcard = /* GraphQL */ `
   }
 `;
 export const createUser = /* GraphQL */ `
-  mutation CreateUser($input: CreateUserInput!, $condition: ModelUserConditionInput) {
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
     createUser(input: $input, condition: $condition) {
       id
       displayName
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
   }
 `;
 export const updateUser = /* GraphQL */ `
-  mutation UpdateUser($input: UpdateUserInput!, $condition: ModelUserConditionInput) {
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
     updateUser(input: $input, condition: $condition) {
       id
       displayName
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
   }
 `;
 export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser($input: DeleteUserInput!, $condition: ModelUserConditionInput) {
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
     deleteUser(input: $input, condition: $condition) {
       id
       displayName
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
   }
 `;
 export const createTodo = /* GraphQL */ `
-  mutation CreateTodo($input: CreateTodoInput!, $condition: ModelTodoConditionInput) {
+  mutation CreateTodo(
+    $input: CreateTodoInput!
+    $condition: ModelTodoConditionInput
+  ) {
     createTodo(input: $input, condition: $condition) {
       id
       name
@@ -127,7 +157,10 @@ export const createTodo = /* GraphQL */ `
   }
 `;
 export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo($input: UpdateTodoInput!, $condition: ModelTodoConditionInput) {
+  mutation UpdateTodo(
+    $input: UpdateTodoInput!
+    $condition: ModelTodoConditionInput
+  ) {
     updateTodo(input: $input, condition: $condition) {
       id
       name
@@ -138,7 +171,10 @@ export const updateTodo = /* GraphQL */ `
   }
 `;
 export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo($input: DeleteTodoInput!, $condition: ModelTodoConditionInput) {
+  mutation DeleteTodo(
+    $input: DeleteTodoInput!
+    $condition: ModelTodoConditionInput
+  ) {
     deleteTodo(input: $input, condition: $condition) {
       id
       name
@@ -149,7 +185,10 @@ export const deleteTodo = /* GraphQL */ `
   }
 `;
 export const createBlog = /* GraphQL */ `
-  mutation CreateBlog($input: CreateBlogInput!, $condition: ModelBlogConditionInput) {
+  mutation CreateBlog(
+    $input: CreateBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
     createBlog(input: $input, condition: $condition) {
       id
       name
@@ -169,7 +208,10 @@ export const createBlog = /* GraphQL */ `
   }
 `;
 export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog($input: UpdateBlogInput!, $condition: ModelBlogConditionInput) {
+  mutation UpdateBlog(
+    $input: UpdateBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
     updateBlog(input: $input, condition: $condition) {
       id
       name
@@ -189,7 +231,10 @@ export const updateBlog = /* GraphQL */ `
   }
 `;
 export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog($input: DeleteBlogInput!, $condition: ModelBlogConditionInput) {
+  mutation DeleteBlog(
+    $input: DeleteBlogInput!
+    $condition: ModelBlogConditionInput
+  ) {
     deleteBlog(input: $input, condition: $condition) {
       id
       name
@@ -209,7 +254,10 @@ export const deleteBlog = /* GraphQL */ `
   }
 `;
 export const createPost = /* GraphQL */ `
-  mutation CreatePost($input: CreatePostInput!, $condition: ModelPostConditionInput) {
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
     createPost(input: $input, condition: $condition) {
       id
       title
@@ -239,7 +287,10 @@ export const createPost = /* GraphQL */ `
   }
 `;
 export const updatePost = /* GraphQL */ `
-  mutation UpdatePost($input: UpdatePostInput!, $condition: ModelPostConditionInput) {
+  mutation UpdatePost(
+    $input: UpdatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
     updatePost(input: $input, condition: $condition) {
       id
       title
@@ -269,7 +320,10 @@ export const updatePost = /* GraphQL */ `
   }
 `;
 export const deletePost = /* GraphQL */ `
-  mutation DeletePost($input: DeletePostInput!, $condition: ModelPostConditionInput) {
+  mutation DeletePost(
+    $input: DeletePostInput!
+    $condition: ModelPostConditionInput
+  ) {
     deletePost(input: $input, condition: $condition) {
       id
       title
@@ -299,7 +353,10 @@ export const deletePost = /* GraphQL */ `
   }
 `;
 export const createComment = /* GraphQL */ `
-  mutation CreateComment($input: CreateCommentInput!, $condition: ModelCommentConditionInput) {
+  mutation CreateComment(
+    $input: CreateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
     createComment(input: $input, condition: $condition) {
       id
       post {
@@ -326,7 +383,10 @@ export const createComment = /* GraphQL */ `
   }
 `;
 export const updateComment = /* GraphQL */ `
-  mutation UpdateComment($input: UpdateCommentInput!, $condition: ModelCommentConditionInput) {
+  mutation UpdateComment(
+    $input: UpdateCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
     updateComment(input: $input, condition: $condition) {
       id
       post {
@@ -353,7 +413,10 @@ export const updateComment = /* GraphQL */ `
   }
 `;
 export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment($input: DeleteCommentInput!, $condition: ModelCommentConditionInput) {
+  mutation DeleteComment(
+    $input: DeleteCommentInput!
+    $condition: ModelCommentConditionInput
+  ) {
     deleteComment(input: $input, condition: $condition) {
       id
       post {

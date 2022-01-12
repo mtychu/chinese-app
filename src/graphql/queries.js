@@ -66,7 +66,13 @@ export const getUser = /* GraphQL */ `
       firstName
       lastName
       email
-      progress
+      progress {
+        flashcardId
+        progress
+        nextReview
+        userMeaning
+        userNotes
+      }
       createdAt
       updatedAt
     }
@@ -93,7 +99,13 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         email
-        progress
+        progress {
+          flashcardId
+          progress
+          nextReview
+          userMeaning
+          userNotes
+        }
         createdAt
         updatedAt
       }
@@ -289,6 +301,78 @@ export const level = /* GraphQL */ `
   ) {
     level(
       level: $level
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        level
+        chineseTrad
+        chineseSimp
+        meanings
+        meaningMnemonic
+        meaningHint
+        reading
+        readingMnemonic
+        readingHint
+        examples
+        prereqs
+        unlocks
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const chineseTrad = /* GraphQL */ `
+  query ChineseTrad(
+    $chineseTrad: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelFlashcardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    chineseTrad(
+      chineseTrad: $chineseTrad
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        level
+        chineseTrad
+        chineseSimp
+        meanings
+        meaningMnemonic
+        meaningHint
+        reading
+        readingMnemonic
+        readingHint
+        examples
+        prereqs
+        unlocks
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const chineseSimp = /* GraphQL */ `
+  query ChineseSimp(
+    $chineseSimp: String
+    $sortDirection: ModelSortDirection
+    $filter: ModelFlashcardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    chineseSimp(
+      chineseSimp: $chineseSimp
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

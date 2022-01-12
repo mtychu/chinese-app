@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import ToDo from './components/ToDo/ToDo';
 import UploadPage from './components/Upload/UploadPage';
-import DisplayWord from './components/DisplayWord/DisplayWord';
+import Review from './components/Review/Review';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -21,7 +21,7 @@ ReactDOM.render(
         <Route path='home' element={<App />} />
         <Route path='todo' element={<ToDo />} />
         <Route path='upload-page' element={<UploadPage />} />
-        <Route path='display-word' element={<DisplayWord />} />
+        <Route path='review' element={<Review />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
