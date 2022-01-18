@@ -9,11 +9,11 @@ type Flashcard @model @auth(rules: [{ allow: public }]) {
   meaningMnemonic: String
   meaningHint: String
 
-  reading: [String!]!
+  readings: [String!]!
   readingMnemonic: String
   readingHint: String
 
-  examples: [[String]]! #[["ex 1 chinese", "ex 1 pinyin"], ["ex 2 chinese", "ex 2 pinyin"]]
+  examples: [[String]]! #[["ex 1 chinese", "ex 2 chinese"], ["ex 1 pinyin", "ex 2 pinyin"]]
   prereqs: [String]!
   unlocks: [String]!
 }

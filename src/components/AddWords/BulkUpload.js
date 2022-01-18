@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import Papa from 'papaparse';
 import { createFlashcard } from '../../graphql/mutations';
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { getFlashcard } from '../../graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify';
 import WordCard from './WordCard';
 
-const CsvReader = () => {
+const BulkUpload = () => {
   const [csvArray, setCsvArray] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -13,6 +14,14 @@ const CsvReader = () => {
       const result = await API.graphql(graphqlOperation(createFlashcard, { input: flashcard }));
     } catch (err) {
       console.error('error creating flashcard:', err);
+    }
+  }
+
+  async function fetchFlashcard(flascardId) {
+    try {
+      const flashcardData = await API.graphql(graphqlOperation(getFlashcard, { id: flascardId }));
+    } catch (err) {
+      console.log('error fetching flashcard');
     }
   }
 
@@ -97,4 +106,4 @@ const CsvReader = () => {
   );
 };
 
-export default CsvReader;
+export default BulkUpload;

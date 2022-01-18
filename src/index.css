@@ -35,11 +35,12 @@ nav {
 .container {
   background-color: rgb(121, 121, 121);
   width: 400px;
-  margin: auto;
+  margin: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 22px;
+  padding: 1em;
+  float: left;
 }
 
 .todo {

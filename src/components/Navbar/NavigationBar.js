@@ -9,7 +9,7 @@ const NavigationBar = (props) => {
       <h3>{props.title}</h3>
       <nav>
         <Link to='/home'>Home</Link> | <Link to='/todo'>To Do</Link> |{' '}
-        <Link to='/upload-page'>Upload</Link>|<Link to='/review'>Review</Link>
+        <Link to='/add-words'>Add Words</Link>|<Link to='/review'>Review</Link>
       </nav>
     </div>
   );
