@@ -1,9 +1,9 @@
 #Flashcard schema - Chinese Vocabulary
 type Flashcard @model @auth(rules: [{ allow: public }]) {
   id: ID! @primaryKey
-  level: String! @index(name: "byLevel", queryField: "level")
-  chineseTrad: String! @index(name: "byTrad", queryField: "chineseTrad")
-  chineseSimp: String! @index(name: "bySimp", queryField: "chineseSimp")
+  level: String! @index(name: "byLevel", queryField: "getFlashcardByLevel")
+  chineseTrad: String! @index(name: "byTrad", queryField: "getFlashcardByChineseTrad")
+  chineseSimp: String! @index(name: "bySimp", queryField: "getFlashcardByChineseSimp")
 
   meanings: [String]!
   meaningMnemonic: String

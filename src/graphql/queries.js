@@ -11,7 +11,7 @@ export const getFlashcard = /* GraphQL */ `
       meanings
       meaningMnemonic
       meaningHint
-      reading
+      readings
       readingMnemonic
       readingHint
       examples
@@ -45,7 +45,7 @@ export const listFlashcards = /* GraphQL */ `
         meanings
         meaningMnemonic
         meaningHint
-        reading
+        readings
         readingMnemonic
         readingHint
         examples
@@ -125,11 +125,7 @@ export const getTodo = /* GraphQL */ `
   }
 `;
 export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListTodos($filter: ModelTodoFilterInput, $limit: Int, $nextToken: String) {
     listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -163,11 +159,7 @@ export const getBlog = /* GraphQL */ `
   }
 `;
 export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListBlogs($filter: ModelBlogFilterInput, $limit: Int, $nextToken: String) {
     listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -213,11 +205,7 @@ export const getPost = /* GraphQL */ `
   }
 `;
 export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String) {
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -267,11 +255,7 @@ export const getComment = /* GraphQL */ `
   }
 `;
 export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListComments($filter: ModelCommentFilterInput, $limit: Int, $nextToken: String) {
     listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -291,15 +275,15 @@ export const listComments = /* GraphQL */ `
     }
   }
 `;
-export const level = /* GraphQL */ `
-  query Level(
-    $level: String
+export const getFlashcardByLevel = /* GraphQL */ `
+  query GetFlashcardByLevel(
+    $level: String!
     $sortDirection: ModelSortDirection
     $filter: ModelFlashcardFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    level(
+    getFlashcardByLevel(
       level: $level
       sortDirection: $sortDirection
       filter: $filter
@@ -314,7 +298,7 @@ export const level = /* GraphQL */ `
         meanings
         meaningMnemonic
         meaningHint
-        reading
+        readings
         readingMnemonic
         readingHint
         examples
@@ -327,15 +311,15 @@ export const level = /* GraphQL */ `
     }
   }
 `;
-export const chineseTrad = /* GraphQL */ `
-  query ChineseTrad(
-    $chineseTrad: String
+export const getFlashcardByChineseTrad = /* GraphQL */ `
+  query GetFlashcardByChineseTrad(
+    $chineseTrad: String!
     $sortDirection: ModelSortDirection
     $filter: ModelFlashcardFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    chineseTrad(
+    getFlashcardByChineseTrad(
       chineseTrad: $chineseTrad
       sortDirection: $sortDirection
       filter: $filter
@@ -350,7 +334,7 @@ export const chineseTrad = /* GraphQL */ `
         meanings
         meaningMnemonic
         meaningHint
-        reading
+        readings
         readingMnemonic
         readingHint
         examples
@@ -363,15 +347,15 @@ export const chineseTrad = /* GraphQL */ `
     }
   }
 `;
-export const chineseSimp = /* GraphQL */ `
-  query ChineseSimp(
-    $chineseSimp: String
+export const getFlashcardByChineseSimp = /* GraphQL */ `
+  query GetFlashcardByChineseSimp(
+    $chineseSimp: String!
     $sortDirection: ModelSortDirection
     $filter: ModelFlashcardFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    chineseSimp(
+    getFlashcardByChineseSimp(
       chineseSimp: $chineseSimp
       sortDirection: $sortDirection
       filter: $filter
@@ -386,7 +370,7 @@ export const chineseSimp = /* GraphQL */ `
         meanings
         meaningMnemonic
         meaningHint
-        reading
+        readings
         readingMnemonic
         readingHint
         examples

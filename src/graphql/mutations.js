@@ -14,7 +14,7 @@ export const createFlashcard = /* GraphQL */ `
       meanings
       meaningMnemonic
       meaningHint
-      reading
+      readings
       readingMnemonic
       readingHint
       examples
@@ -38,7 +38,7 @@ export const updateFlashcard = /* GraphQL */ `
       meanings
       meaningMnemonic
       meaningHint
-      reading
+      readings
       readingMnemonic
       readingHint
       examples
@@ -62,7 +62,7 @@ export const deleteFlashcard = /* GraphQL */ `
       meanings
       meaningMnemonic
       meaningHint
-      reading
+      readings
       readingMnemonic
       readingHint
       examples

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Amplify, { API, graphqlOperation } from 'aws-amplify';
 import { createFlashcard } from '../../graphql/mutations';
-import { listFlashcards } from '../../graphql/queries';
+import { listFlashcards, getFlashcard } from '../../graphql/queries';
 import '../../index.css';
 
 import awsExports from '../../aws-exports';
@@ -14,7 +14,7 @@ const initialState = {
   meanings: [],
   meaningMnemonic: '',
   meaningHint: '',
-  readings: '',
+  readings: [],
   readingMnemonic: '',
   readingHint: '',
   examples: [],
@@ -23,13 +23,18 @@ const initialState = {
 
 const VocabForm = () => {
   const [VocabFormState, setFormState] = useState(initialState);
+  const [CardPreviewTrad, setsetCardPreviewTrad] = useState([]);
+  const [CardPreviewSimp, setsetCardPreviewSimp] = useState([]);
   const [todos, setTodos] = useState([]);
 
   function setInput(key, value) {
-    setFormState({ ...TodoFormState, [key]: value });
+    setFormState({ ...VocabFormState, [key]: value });
+    //[key] needs to be in [] or would just be in there as a string
   }
 
-  async function fetchTodos() {
+  async function fetchFlashcardByWord(chineseSimp, chineseTrad) {
+    var char = chineseTrad || chineseSimp;
+    //TOD IF chinseTrad EXISTS ELSE TAKE THE OTHER ONE
     try {
       const todoData = await API.graphql(graphqlOperation(listFlashcards));
       const todos = todoData.data.listTodos.items;
@@ -41,43 +46,51 @@ const VocabForm = () => {
 
   async function addTodo() {
     try {
-      if (!TodoFormState.name || !TodoFormState.description) return;
-      const todo = { ...TodoFormState };
+      if (!VocabFormState.name || !VocabFormState.description) return;
+      const todo = { ...VocabFormState };
       setTodos([...todos, todo]);
       setFormState(initialState);
-      await API.graphql(graphqlOperation(createTodo, { input: todo }));
+      await API.graphql(graphqlOperation(createFlashcard, { input: todo }));
     } catch (err) {
       console.log('error creating todo:', err);
     }
   }
 
   return (
-    <div>
-      <div className='container'>
-        <h2>Add Vocab</h2>
-        <input
-          onChange={(event) => setInput('name', event.target.value)}
-          className='input'
-          value={TodoFormState.name}
-          placeholder='Name'
-        />
-        <input
-          onChange={(event) => setInput('description', event.target.value)}
-          className='input'
-          value={TodoFormState.description}
-          placeholder='Description'
-        />
-        <button className='button' onClick={addTodo}>
-          Add Vocab
-        </button>
-        {todos.map((todo, index) => (
-          <div key={todo.id ? todo.id : index} className='todo'>
-            <p className='todoName'>{todo.name}</p>
-            <p className='todoDescription'>{todo.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <form className='container'>
+      <h2>Add Vocab</h2>
+      <input
+        onChange={(event) => {
+          setInput('chineseTrad', event.target.value);
+          setsetCardPreviewTrad(event.target.value.split(''), () => console.log(CardPreviewTrad));
+        }}
+        className='input'
+        value={VocabFormState.chineseTrad}
+        placeholder='繁體 Vocab'
+      />
+      <input
+        onChange={(event) => setInput('chineseSimp', event.target.value)}
+        className='input'
+        value={VocabFormState.chineseSimp}
+        placeholder='简体 Vocab'
+      />
+      {/* TODO MAKE CHINESE AUTO TRANSLATE BETWEEN THE TWO */}
+      <input
+        onChange={(event) => setInput('meanings', event.target.value)}
+        className='input'
+        value={VocabFormState.name}
+        placeholder='Name'
+      />
+      <input
+        onChange={(event) => setInput('name', event.target.value)}
+        className='input'
+        value={VocabFormState.name}
+        placeholder='Name'
+      />
+      <button className='button' onClick={addTodo}>
+        Add Vocab
+      </button>
+    </form>
   );
 };
 
