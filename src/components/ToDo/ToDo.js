@@ -18,6 +18,9 @@ const ToDo = () => {
   useEffect(() => {
     fetchTodos();
   }, []);
+  //Array takes in dependencies (re-runs useEffect ONLY when those change)
+  //Dependencies should be state objects. useEffect typically runs on:
+  //1. prop change 2. state change 2. parent state change
 
   function setInput(key, value) {
     setFormState({ ...TodoFormState, [key]: value });

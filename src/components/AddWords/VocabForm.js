@@ -8,33 +8,32 @@ import '../../index.css';
 import awsExports from '../../aws-exports';
 Amplify.configure(awsExports);
 
-const initialState = {
-  chineseSimp: '',
-  chineseTrad: '',
-  meanings: [],
-  meaningMnemonic: '',
-  meaningHint: '',
-  readings: [],
-  readingMnemonic: '',
-  readingHint: '',
-  examples: [],
-  examplesPinyin: [],
-};
-
 const VocabForm = () => {
-  const [VocabFormState, setFormState] = useState(initialState);
-  const [CardPreviewTrad, setsetCardPreviewTrad] = useState([]);
-  const [CardPreviewSimp, setsetCardPreviewSimp] = useState([]);
+  const [chineseTradForm, setchineseTradForm] = useState();
+  const [chineseSimpForm, setchineseSimpForm] = useState();
+  const [meaningsForm, setmeaningsForm] = useState();
+  const [meaningMnemonicForm, setmeaningMnemonicForm] = useState();
+  const [meaningHintForm, setmeaningHintForm] = useState([]);
+  const [readingsForm, setreadingsForm] = useState([]);
+  const [readingMnemonicForm, setreadingMnemonicForm] = useState([]);
+  const [readingHintForm, setreadingHintForm] = useState([]);
+  const [cardPreviewTrad, setCardPreviewTrad] = useState([]);
   const [todos, setTodos] = useState([]);
 
-  function setInput(key, value) {
-    setFormState({ ...VocabFormState, [key]: value });
-    //[key] needs to be in [] or would just be in there as a string
-  }
+  useEffect(() => {
+    console.log({
+      chineseTradForm: chineseTradForm,
+      chineseSimpForm: chineseSimpForm,
+      meaningsForm: meaningsForm,
+      readingsForm: readingsForm,
+    });
+  });
+
+  function pinyinTransform(userString) {}
 
   async function fetchFlashcardByWord(chineseSimp, chineseTrad) {
     var char = chineseTrad || chineseSimp;
-    //TOD IF chinseTrad EXISTS ELSE TAKE THE OTHER ONE
+    //TODO IF chinseTrad EXISTS ELSE TAKE THE OTHER ONE
     try {
       const todoData = await API.graphql(graphqlOperation(listFlashcards));
       const todos = todoData.data.listTodos.items;
@@ -44,12 +43,11 @@ const VocabForm = () => {
     }
   }
 
-  async function addTodo() {
+  async function addFlashcard() {
     try {
-      if (!VocabFormState.name || !VocabFormState.description) return;
-      const todo = { ...VocabFormState };
+      if (!chineseSimpForm || !chineseTradForm) return;
+      const todo = { ...formState };
       setTodos([...todos, todo]);
-      setFormState(initialState);
       await API.graphql(graphqlOperation(createFlashcard, { input: todo }));
     } catch (err) {
       console.log('error creating todo:', err);
@@ -58,36 +56,36 @@ const VocabForm = () => {
 
   return (
     <form className='container'>
-      <h2>Add Vocab</h2>
+      <h2>Add Vocab 加詞彙</h2>
       <input
         onChange={(event) => {
           setInput('chineseTrad', event.target.value);
-          setsetCardPreviewTrad(event.target.value.split(''), () => console.log(CardPreviewTrad));
+          setCardPreviewTrad(event.target.value.split(''), () => console.log(cardPreviewTrad));
         }}
         className='input'
-        value={VocabFormState.chineseTrad}
+        value={chineseTradForm}
         placeholder='繁體 Vocab'
       />
       <input
         onChange={(event) => setInput('chineseSimp', event.target.value)}
         className='input'
-        value={VocabFormState.chineseSimp}
+        value={chineseSimpForm}
         placeholder='简体 Vocab'
       />
       {/* TODO MAKE CHINESE AUTO TRANSLATE BETWEEN THE TWO */}
       <input
         onChange={(event) => setInput('meanings', event.target.value)}
         className='input'
-        value={VocabFormState.name}
-        placeholder='Name'
+        value={readingsForm}
+        placeholder='Readings (seperated by comma)'
       />
       <input
         onChange={(event) => setInput('name', event.target.value)}
         className='input'
-        value={VocabFormState.name}
-        placeholder='Name'
+        value={meaningsForm}
+        placeholder='Meanings (separated by comma)'
       />
-      <button className='button' onClick={addTodo}>
+      <button className='button' onClick={addFlashcard}>
         Add Vocab
       </button>
     </form>
